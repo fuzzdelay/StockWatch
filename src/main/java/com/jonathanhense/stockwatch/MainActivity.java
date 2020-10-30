@@ -205,7 +205,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
     }
 */
+/*
     protected void onResume() {
+
         readJSONData(stocks);
         List<String> symbolList = new ArrayList<>();
         for(Stock stock : stocks){
@@ -216,7 +218,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             new Thread(stockDownloader).start();
         }
         super.onResume();
-    }
+
+
+    }*/
 
     public void addStock(Stock stock) {
         if (stock == null) {
@@ -306,6 +310,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             writer.setIndent("  ");
             writer.beginArray();
             for (Stock s : stocks) {
+                writer.beginObject();
                 writer.name("symbol").value(s.getSymbol());
                 writer.name("name").value(s.getName());
                 writer.name("latestPrice").value(s.getPrice());
@@ -342,6 +347,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Stock stock = new Stock(symbol, name, latestPrice, change, changePercent);
                 stocks.add(stock);
+                System.out.println(stock.toString());
             }
             stockAdapter.notifyDataSetChanged();
         } catch (Exception e) {
